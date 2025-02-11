@@ -26,15 +26,9 @@
                     </tr>
                 </tbody>
             </table>
- {%extends "layout.html"%}
- {%block container%}
-            {% for i in lista %}
-              <h1></h1>{{titulo}}
-
-             <h2>{{i}}</h2>
-            {%endfor%}
-{%endblock%}
-
+            {% block container %}
+            {%endblock%}
+           
         </div>
     </div>
 
