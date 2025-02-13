@@ -1,0 +1,15 @@
+.bg-image {
+    background-image: url('https://www.radioformula.com.mx/u/fotografias/m/2022/7/25/f1280x720-594006_725681_5050.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: white;
+}
+.content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+.full-height {
+    height: 100vh;
+}

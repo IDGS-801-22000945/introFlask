@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinépolis</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 bg-image d-flex align-items-center">
+                <div class="content">
+                    <h2>Entradas</h2>
+                    <form action="/cinepolis" method="post">
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantCompradores">Cantidad Compradores:</label>
+                            <input type="number" class="form-control" id="cantCompradores" name="cantCompradores" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantBoletos">Cantidad De Boletos:</label>
+                            <input type="number" class="form-control" id="cantBoletos" name="cantBoletos" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tarjeta Cineco:</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tarjeta_cineco" id="tarSi" value="si">
+                                <label class="form-check-label" for="tarSi">Sí</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tarjeta_cineco" id="tarNo" value="no">
+                                <label class="form-check-label" for="tarNo">No</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Procesar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 bg-image d-flex align-items-center">
+                <div class="content">
+                    <h2>Salidas</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="total">Total a Pagar:</label>
+                            <input type="text" class="form-control" id="total" name="total" readonly value="{{ total }}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 bg-image d-flex align-items-center">
+                <div class="content">
+                    <h2></h2>
+                    <div id="mensaje">
+                        <h1>{{ mensaje }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
