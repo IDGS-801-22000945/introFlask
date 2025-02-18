@@ -1,0 +1,32 @@
+.zodiac-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #000;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fdfdfd;
+}
+.form-section {
+    flex: 1;
+    margin-right: 20px;
+}
+.result-section {
+    flex: 1;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.zodiac-icon {
+    width: 100px;
+    height: 100px;
+    background-color: #2c3e50;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 3rem;
+}

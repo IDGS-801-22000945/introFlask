@@ -97,7 +97,7 @@ def OperasBas():
 @app.route("/cinepolis", methods=["GET", "POST"])
 def cine():
     total = 0
-    descuento = None
+    descuento = 0
     mensaje = ""
 
     if request.method == "POST":
@@ -124,6 +124,42 @@ def cine():
                 total -= descuentoTarjeta
 
     return render_template("cinepolisFlask.html", mensaje=mensaje, total=total)
+
+@app.route("/zodiaco", methods=["GET", "POST"])
+def zodiaco():
+    anio = 0
+    dia = 0
+    mes = 0
+    edad = 0
+    nombre = ""
+    apellidoP = ""
+    apellidoM = ""
+    
+    animales = [
+        "Mono", "Gallo", "Perro", "Cerdo", "Rata", "Buey",
+        "Tigre", "Conejo", "Dragón", "Serpiente", "Caballo", "Cabra"
+    ]
+    imagenes = [
+        "mono.jpg", "gallo.jpg", "perro.jpg", "cerdo.jpg", "rata.jpg", "buey.jpg",
+        "tigre.jpg", "conejo.jpg", "dragon.jpg", "serpiente.jpg", "caballo.jpg", "cabra.jpg"
+    ]
+
+    resultado = ""
+    signo_imagen = ""
+    if request.method == "POST":
+        nombre = request.form.get("nombre")
+        apellidoP = request.form.get("apellidoP")
+        apellidoM = request.form.get("apellidoM")
+        dia = int(request.form.get("dia"))
+        mes = int(request.form.get("mes"))
+        anio = int(request.form.get("anio"))
+        edad = 2025 - anio
+        iAnimal = anio % 12
+        animal = animales[iAnimal]
+        signo_imagen = imagenes[iAnimal]
+        resultado = f"Hola, {nombre} {apellidoP} {apellidoM}, tienes {edad} años. Tu signo zodiacal es: {animal}."
+
+    return render_template("zodiaco.html", animales=animales, resultado=resultado, signo_imagen=signo_imagen)
 
 # Sin bajar el servidor se pone app.run(debug=True)
 # Cambiar el puerto app.run(debug=True,port=3000)
