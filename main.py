@@ -1,4 +1,6 @@
 from flask import Flask, render_template,request #IMPORTANTE IMPORTAR FLASK
+import forms 
+
 
 app=Flask(__name__)
 
@@ -150,8 +152,6 @@ def zodiaco():
         nombre = request.form.get("nombre")
         apellidoP = request.form.get("apellidoP")
         apellidoM = request.form.get("apellidoM")
-        dia = int(request.form.get("dia"))
-        mes = int(request.form.get("mes"))
         anio = int(request.form.get("anio"))
         edad = 2025 - anio
         iAnimal = anio % 12
@@ -160,6 +160,26 @@ def zodiaco():
         resultado = f"Hola, {nombre} {apellidoP} {apellidoM}, tienes {edad} años. Tu signo zodiacal es: {animal}."
 
     return render_template("zodiaco.html", animales=animales, resultado=resultado, signo_imagen=signo_imagen)
+
+@app.route("/alumnos", methods=["GET", "POST"])
+def alumnos():
+    mat=''
+    nom=''
+    ape=''
+    email=''
+    alummo_clas=forms.UserForm(request.form)
+    if request.method == 'POST':
+        mat=alummo_clas.matricula.data
+        nom=alummo_clas.nombre.data
+        ape=alummo_clas.apellido.data
+        email=alummo_clas.correo.data
+    return render_template("alumnos.html", form=alummo_clas,mat=mat,nom=nom,ape=ape,email=email)
+
+
+
+
+
+
 
 # Sin bajar el servidor se pone app.run(debug=True)
 # Cambiar el puerto app.run(debug=True,port=3000)
