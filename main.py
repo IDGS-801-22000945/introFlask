@@ -1,8 +1,16 @@
 from flask import Flask, render_template,request #IMPORTANTE IMPORTAR FLASK
 import forms 
+from flask_wtf.csrf import CSRFProtect
+from flask import g
+from flask import flash
 
+csrf=CSRFProtect()
 
 app=Flask(__name__)
+#Crear clave
+csrf=CSRFProtect(app)
+app.secret_key="12345"
+
 
 @app.route("/hola")
 def hola():
@@ -31,10 +39,15 @@ def suma(n1,n2):
 def func(param="Jaqui"):
     return  f"<h1>Hola, {param}! </h1>"
 
+
+
 @app.route("/")
 def index():
+    nom="None"
     titulo="IDGS801"
     lista=["Jaqueline","Rafael","Viviana"]
+    nom=g.user
+    print("Index 2 {}".format(nom))
     return render_template("index.html",titulo=titulo,lista=lista)
 
 @app.route("/ejemplo1")
@@ -161,6 +174,23 @@ def zodiaco():
 
     return render_template("zodiaco.html", animales=animales, resultado=resultado, signo_imagen=signo_imagen)
 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
+
+@app.before_request
+def before_request():
+    g.user = "Jaqui"
+    print("before1")
+
+@app.after_request
+def after_request(response):
+    print("after1")
+    return response
+
+
+
 @app.route("/alumnos", methods=["GET", "POST"])
 def alumnos():
     mat=''
@@ -168,11 +198,15 @@ def alumnos():
     ape=''
     email=''
     alummo_clas=forms.UserForm(request.form)
-    if request.method == 'POST':
+    if request.method == 'POST' and alummo_clas.validate():
         mat=alummo_clas.matricula.data
         nom=alummo_clas.nombre.data
         ape=alummo_clas.apellido.data
         email=alummo_clas.correo.data
+
+        mensaje="Bienvenido {}".format(nom)
+        flash(mensaje)
+
     return render_template("alumnos.html", form=alummo_clas,mat=mat,nom=nom,ape=ape,email=email)
 
 
@@ -184,4 +218,5 @@ def alumnos():
 # Sin bajar el servidor se pone app.run(debug=True)
 # Cambiar el puerto app.run(debug=True,port=3000)
 if __name__ == "__main__":
+    csrf.init_app(app)
     app.run(debug=True,port=3000)
