@@ -14,3 +14,32 @@
 </ul>
 {% endif %}
 {% endmacro %}
+
+
+{% macro chinoHoros(field) %}
+<td>{{ field.label }}</td>
+<dd>{{ field(**kwargs) | safe }}</dd>
+{% if field.errors %}
+<ul>
+    {% for error in field.errors %}
+    <li style="color: red;">{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}
+
+
+{% macro mostrarMensaje(anio, mes, dia, nombre, apellidoP, apellidoM) %}
+    {% set edad = (2025 - anio) %}
+    {% set signos_chinos = ["Mono", "Gallo", "Perro", "Cerdo", "Rata", "Buey", "Tigre", "Conejo", "Dragón", "Serpiente", "Caballo", "Cabra"] %}
+    {% set imgSigno = [
+        "mono.jpg", "gallo.jpg", "perro.jpg", "cerdo.jpg", "rata.jpg", "buey.jpg",
+        "tigre.jpg", "conejo.jpg", "dragon.jpg", "serpiente.jpg", "caballo.jpg", "cabra.jpg"] %} 
+
+    {% set indice = anio % 12 %}
+    {% set signo_chino = signos_chinos[indice] %}
+    {% set imagen = imgSigno[indice] %}
+
+    Hola, {{ nombre }} {{ apellidoP }} {{ apellidoM }}, tienes {{ edad }} años y tu signo chino es {{ signo_chino }}.
+    <img src="{{ url_for('static', filename='img/' + imagen) }}" alt="{{ signo_chino }}" width="80">
+{% endmacro %}

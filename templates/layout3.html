@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horóscopo Chino</title>
+    <link rel="stylesheet" href="../static/bootstrap/bootstrap/css/bootstrap.min.css" />
+    <style>
+        body {
+            padding-top: 60px;
+            background-color: #f2e1d6; /* Color suave y cálido, que evoca lo espiritual */
+            font-family: 'Georgia', serif; /* Tipografía elegante */
+        }
+
+        .navbar-custom {
+            background-color: #1d1d1d; /* Color oscuro para el fondo de la barra de navegación */
+            border-bottom: 2px solid #d4af37; /* Toque dorado, simbolizando la riqueza de la cultura china */
+        }
+
+        .navbar-custom .navbar-brand, .navbar-custom .navbar-nav > li > a {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .navbar-custom .navbar-brand {
+            font-size: 24px; /* Tamaño de texto más grande para la marca */
+        }
+
+        .navbar-custom .navbar-nav > li > a:hover {
+            color: #d4af37; /* Dorado para resaltar al pasar el ratón */
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background-image: url('https://www.example.com/fondo-horoscopo.jpg'); /* Fondo con textura o imagen temática */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .tr-head {
+            background: #dff0d8;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .footer {
+            padding: 15px 0;
+            background-color: #1d1d1d;
+            color: #ffffff;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 14px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: #d4af37; /* Dorado para resaltar los títulos */
+        }
+
+        .alert {
+            border: 2px solid #d4af37;
+            background-color: #fff8e1;
+            color: #333;
+        }
+    </style>
+     <link
+     href="../static/bootstrap/bootstrap/css/bootstrap-responsive.min.css"
+     rel="stylesheet"
+   />
+</head>
+<body>
+    <div class="navbar navbar-custom navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="navbar-brand" href="">IDGS-801</a>
+
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="">
+                            <i class="icon-home icon-white"></i>
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="icon-user icon-white"></i>
+                            Horóscopo Chino
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="icon-user icon-white"></i>
+                            Horóscopo
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="container form-container">
+        {% block container %}
+        {% endblock %}
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Horóscopo Chino. Jaqueline Núñez Mendoza.</p>
+    </div>
+</body>
+</html>

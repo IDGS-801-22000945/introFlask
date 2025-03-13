@@ -1,0 +1,22 @@
+{% extends "layout3.html" %}
+{% block container %}
+{% import "_macros.html" as macro %}
+
+<form action="" method="post" novalidate>
+    {{ form.csrf_token }}
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    {{ macro.chinoHoros(form.anio) }}
+    {{ macro.chinoHoros(form.mes) }}
+    {{ macro.chinoHoros(form.dia) }}
+    {{ macro.chinoHoros(form.nombre) }}
+    {{ macro.chinoHoros(form.apellidoP) }}
+    {{ macro.chinoHoros(form.apellidoM) }}
+    <input type="submit" name="btn1" value="Guardar" class="btn btn-primary" />
+</form>
+
+{% if form.anio.data and form.nombre.data and form.apellidoP.data and form.apellidoM.data %}
+    <h2>
+        {{ macro.mostrarMensaje(form.anio.data, form.mes.data, form.dia.data, form.nombre.data, form.apellidoP.data, form.apellidoM.data) }}
+    </h2>
+{% endif %}
+{% endblock %}

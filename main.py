@@ -3,6 +3,8 @@ import forms
 from flask_wtf.csrf import CSRFProtect
 from flask import g
 from flask import flash
+from forms import hChino
+
 
 csrf=CSRFProtect()
 
@@ -209,11 +211,27 @@ def alumnos():
 
     return render_template("alumnos.html", form=alummo_clas,mat=mat,nom=nom,ape=ape,email=email)
 
+@app.route("/hChino", methods=["GET", "POST"])
+def chino():
+    hChino = forms.hChino(request.form) 
+    dia = ''
+    mes = '' 
+    anio = ''
+    nombre = ''
+    apellidoP = ''
+    apellidoM = ''
+    
+    if request.method == 'POST' and hChino.validate():
+        dia = hChino.dia.data
+        mes = hChino.mes.data
+        anio = hChino.anio.data
+        nombre = hChino.nombre.data
+        apellidoP = hChino.apellidoP.data
+        apellidoM = hChino.apellidoM.data
 
+        flash(f"Bienvenido {nombre}")
 
-
-
-
+    return render_template("chinoHoros.html", form=hChino, dia=dia, mes=mes, anio=anio, nombre=nombre, apellidoP=apellidoP, apellidoM=apellidoM)
 
 # Sin bajar el servidor se pone app.run(debug=True)
 # Cambiar el puerto app.run(debug=True,port=3000)
